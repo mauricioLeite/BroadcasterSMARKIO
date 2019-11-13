@@ -9,9 +9,5 @@ Comments.create({
 });
 
 Comments.create({
-	phrase: "Concluímos que chegamos à conclusão que não concluímos nada. Por isso, conclui-se que a conclusão será concluída, quando todas tiverem concluído que já é tempo de concluir uma conclusão."
-});
-
-Comments.create({
 	phrase: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a elit finibus, ullamcorper dolor egestas, facilisis orci."
 });
