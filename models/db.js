@@ -5,10 +5,10 @@ const sequelize = new Sequelize('broadcaster','root','',{
 })
 
 sequelize.authenticate().then(function(){
-            console.log("Connection successfully!");
-        }).catch(function(erro){
-            console.log("Conection failed: "+erro);
-        })
+    	console.log("Connection successfully!");
+	}).catch(function(erro){
+    	console.log("Conection failed: "+erro);
+})
 
 module.exports = {
 	Sequelize: Sequelize,

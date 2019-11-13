@@ -1,13 +1,13 @@
 <div class="left">
     <h3>Comentário</h3>
-    <form id="comment-form">
-        <textarea class="comment" id="create-comment"></textarea><br>
-        <button id="create-button">Cadastrar</button>
+    <form id="comment_form">
+        <textarea class="comment" id="create_comment"></textarea><br>
+        <button id="create_button">Cadastrar</button>
     </form>
     <script type="text/javascript">
-        $('#comment-form').on('submit', function(event){
+        $('#comment_form').on('submit', function(event){
             event.preventDefault();
-            var comment = $('#create-comment').val();
+            var comment = $('#create_comment').val();
             if(comment !== null){
                 sendComment(comment);
             }else{
@@ -22,9 +22,9 @@
     <table id="tablePhrases">
         {{#each phrases}}
             <tr>
-                <th class="phrase">{{phrase}}</th>
-                <th>
-                    <button class="listen">Ouvir</button>
+                <th class="phrase"><p>{{phrase}}</p></th>
+                <th class="listen" id='{{id}}' onClick="playAudio(this.id)" >
+                    <button>Ouvir</button>
                 </th>
             </tr>
         {{/each}}
