@@ -15,7 +15,7 @@ _**Warning**_: Check your DB infos in db.js and createDB.js if you have any issu
 
 5 - The server will run in http://localhost:3000/comments.
 
-### Future possible updates
+### Future possible update
 -  Configure migration to Database.
 
 ### My setup
