@@ -8,7 +8,8 @@ Talker using IBM Watson Text to Speech.
 
 2 - Run ```npm install``` to download dependencies.
 
-3 - In folder models run ```node createDB.js``` and after  create DB press ctrl+C, repeat to ```node createEntries.js```, this process create database and populate.
+3 - In folder **models** run ```node createDB.js``` and after  create DB press ctrl+C, repeat to ```node createEntries.js```, this process create database and populate.
+_**Warning**_: Check your DB infos in db.js and createDB.js if you have any issue.
 
 4 - Return to previous folder and to start server run ```node server.js``` or ```nodemon server.js``` in development.
 
@@ -19,7 +20,7 @@ Talker using IBM Watson Text to Speech.
 
 ### My setup
 
-- MySQL:  Ver 15.1 Distrib 10.4.10-MariaDB, for Linux (x86_64) using readline 5.1
+- MySQL (LAMPP):  Ver 15.1 Distrib 10.4.10-MariaDB, for Linux (x86_64)
 - OS: Arch Linux 5.3.10
 - NodeJS: V12.13.0
 - npm: 6.13.0
