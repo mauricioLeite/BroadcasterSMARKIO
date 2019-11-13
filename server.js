@@ -1,39 +1,62 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
+/*
+const fs = require('fs');
+const TextToSpeechV1 = require('ibm-watson/text-to-speech/v1');
+const { ImaAuthenticator} =  require('ibm-watson/auth');
+const apiKEY = "ubaJkTLUceNf2YWATrxic-4L37bWnklTxRkxMTYpwvtj";
+const apiURL = "https://stream.watsonplatform.net/text-to-speech/api";
+*/
+// API BEFORE THAT COMMENT
 
-var comments = [
-{
-	id:1,
-	phrase: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc accumsan iaculis vulputate. Integer facilisis magna ac quam luctus suscipit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis urna enim. Sed pulvinar, sem tincidunt molestie placerat, ipsum felis sagittis sapien, id commodo leo ipsum eget neque. Pellentesque sed egestas mauris. Pellentesque vel urna ac ex mattis feugiat. In finibus posuere lacus ac scelerisque. Donec in nunc egestas, commodo lorem in, molestie arcu.'
-},
-{
-	id:2,
-	phrase: 'Hello world.'
-}
-];
 
-var currentId = 2;
 
-var PORT = process.env.PORT || 3000;
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const handlebars = require('express-handlebars');
+const path = require('path');
+const Post = require('./models/Post')
 
-app.use(express.static(__dirname));
-app.use(bodyParser.json());
+// PORT
+const PORT = process.env.PORT || 3000;
 
-app.get('/comments', function(req, res){
-	res.send({comments: comments});
-})
+//Config
+	// Template Engine
+		app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+		app.set('view engine', 'handlebars');
+	//Body Parser
+		app.use(bodyParser.json());
+	// CSS and JS files
+		app.use(express.static(path.join(__dirname,"public")));
 
-app.post('/comments', function(req, res){
-	var commentPhrase = req.body.phrase;
-	currentId++;
-	comments.push({
-		id: currentId,
-		phrase: commentPhrase
+
+// Routes
+	app.get('/comments', function(req, res){
+		Post.findAll({
+			order: [['id', 'DESC']]
+		}).then(function(phrases){	
+			res.render('comments', {phrases :phrases});
+		})
 	});
-	res.send('Successfully updated comment!');
-});
 
-app.listen(PORT, function(){
-	console.log('Server lintening on ' + PORT);
-});
+// *********************************************** 
+//				RUN API CODE HERE BELOW	
+// ***********************************************
+	app.post('/new_comments', function(req, res){
+		Post.create({
+			phrase: req.body.phrase
+		});
+		res.render('comments');
+	})
+
+	app.get('/read_comments', function(req, res){
+		Post.findAll({
+			order:[['id', 'DESC']]
+		}).then(function(data){
+			res.jsonp(data)
+		})
+	})
+
+// Server Listening
+	app.listen(PORT, function(){
+		console.log('Server lintening on ' + PORT);
+	});

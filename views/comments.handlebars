@@ -1,0 +1,32 @@
+<div class="left">
+    <h3>Comentário</h3>
+    <form id="comment-form">
+        <textarea class="comment" id="create-comment"></textarea><br>
+        <button id="create-button">Cadastrar</button>
+    </form>
+    <script type="text/javascript">
+        $('#comment-form').on('submit', function(event){
+            event.preventDefault();
+            var comment = $('#create-comment').val();
+            if(comment !== null){
+                sendComment(comment);
+            }else{
+                alert('Digite um comentário.');
+            }
+            event.stopPropagation();
+        })
+    </script>
+</div>
+<div class="right">
+    <h3>Comentários</h3>
+    <table id="tablePhrases">
+        {{#each phrases}}
+            <tr>
+                <th class="phrase">{{phrase}}</th>
+                <th>
+                    <button class="listen">Ouvir</button>
+                </th>
+            </tr>
+        {{/each}}
+    </table>
+</div>
